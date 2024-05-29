@@ -281,6 +281,13 @@ const TokenizerInfo = ({
       <tbody>
         {Object.entries(info).map(([key, value]) => {
           if (key === "chat_template") {
+            let chat_template_content = value;
+            if (typeof value === "object") {
+              chat_template_content = value.default ?? Object.values(value)[0];
+            }
+            if (typeof chat_template_content !== "string") {
+              chat_template_content = "";
+            }
             return (
               <tr key={key}>
                 <td>{key}</td>
@@ -288,7 +295,7 @@ const TokenizerInfo = ({
                   <textarea
                     readOnly
                     placeholder="No chat template provided."
-                    value={value ?? ""}
+                    value={chat_template_content}
                     style={{ width: "100%", height: "100px", resize: "none" }}
                   ></textarea>
                 </td>
