@@ -282,7 +282,7 @@ const TokenizerInfo = ({
         {Object.entries(info).map(([key, value]) => {
           if (key === "chat_template") {
             let chat_template_content = value;
-            if (typeof value === "object") {
+            if (value && typeof value === "object") {
               chat_template_content = value.default ?? Object.values(value)[0];
             }
             if (typeof chat_template_content !== "string") {
@@ -344,15 +344,17 @@ export function TokenizerPanel({
   config,
   onChange,
   inputValue,
+  getInitValue,
 }: {
   config: TokenizerDefine;
   onChange?: (content: string) => any;
   inputValue?: string | null;
+  getInitValue?: () => string | undefined | null;
 }) {
   const { tokenizer } = useTokenizer(config);
 
   const [value, setValue] = useState(
-    inputValue ?? "Potato potato tomato potato."
+    () => getInitValue?.() ?? "Potato potato tomato potato."
   );
   const hwtRef = useRef(null as null | Editor);
 

@@ -39,6 +39,7 @@ export const DirectTokenInner = ({
   const [config, setConfig] = useState<TokenizerDefine | null>(
     initConfig || null
   );
+  const { getQueryParam } = useQueryParams();
 
   return (
     <>
@@ -54,18 +55,13 @@ export const DirectTokenInner = ({
           config={config}
           inputValue={inputValue}
           onChange={onChange}
+          getInitValue={() => {
+            return getQueryParam("content");
+          }}
         ></TokenizerPanel>
       )}
     </>
   );
-};
-
-const useInitContent = () => {
-  const { getQueryParam } = useQueryParams();
-  return useState(() => {
-    const content = getQueryParam("content");
-    return content || null;
-  })[0];
 };
 
 export const DirectTokenize = () => {
@@ -91,8 +87,6 @@ export const DirectTokenize = () => {
     [setQueryParam]
   );
 
-  const initContent = useInitContent();
-
   return (
     <DirectTokenizeContainer>
       <h3>
@@ -111,7 +105,6 @@ export const DirectTokenize = () => {
         key={id}
         onConfigChanged={onConfigChanged}
         initConfig={initConfig}
-        inputValue={initContent}
         onChange={(value) => {
           // 只写入 1024 字符以内的
           if (value.length < 1024) {
