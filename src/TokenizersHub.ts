@@ -4,7 +4,9 @@ import EventEmitter from "eventemitter3";
 
 type PreTrainedTokenizer = tokenizers.PreTrainedTokenizer;
 
+const package_version = "1.1.1";
 export const packages = [
+  "llama3_1",
   "llama2",
   "llama3",
   "gpt4o",
@@ -27,7 +29,7 @@ export const packages = [
   "text_embedding_ada002",
 ].map((x) => ({
   name: x,
-  url: `https://cdn.jsdelivr.net/npm/@lenml/tokenizer-${x}@1.0.4/+esm`,
+  url: `https://cdn.jsdelivr.net/npm/@lenml/tokenizer-${x}@${package_version}/+esm`,
 }));
 
 // 从这里取得所有的 Tokenizers
