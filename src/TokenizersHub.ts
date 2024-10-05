@@ -4,7 +4,7 @@ import EventEmitter from "eventemitter3";
 
 type PreTrainedTokenizer = tokenizers.PreTrainedTokenizer;
 
-const package_version = "1.1.1";
+const package_version = "3.0.1";
 export const packages = [
   "llama3_1",
   "llama2",

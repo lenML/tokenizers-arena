@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@lenml/tokenizers": "^1.0.5",
+    "@lenml/tokenizers": "^3.0.1",
     "@quik-fe/stand": "^1.1.2",
     "@types/draft-js": "^0.11.18",
     "@types/styled-components": "^5.1.34",
