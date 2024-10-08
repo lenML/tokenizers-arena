@@ -8,7 +8,8 @@ const SideBySideContainer = styled.div`
   display: flex;
   flex-direction: row;
 
-  height: 100%;
+  height: max-content;
+  min-height: 100%;
   width: 80%;
   min-width: 640px;
 
@@ -100,7 +101,7 @@ export const SideBySide = () => {
               deleteQueryParam("left");
             }}
           >
-            reset
+            [reset]
           </small>{" "}
         </h3>
         <DirectTokenInner
@@ -126,7 +127,7 @@ export const SideBySide = () => {
               deleteQueryParam("right");
             }}
           >
-            reset
+            [reset]
           </small>
         </h3>
         <DirectTokenInner

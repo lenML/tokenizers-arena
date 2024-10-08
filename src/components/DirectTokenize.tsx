@@ -9,11 +9,12 @@ const DirectTokenizeContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  height: 100%;
-  max-width: 640px;
+  height: max-content;
+  min-height: 100%;
+  width: 80%;
   min-width: 640px;
 
-  > h3 {
+  > p {
     span {
       user-select: none;
       cursor: pointer;
@@ -89,7 +90,7 @@ export const DirectTokenize = () => {
 
   return (
     <DirectTokenizeContainer>
-      <h3>
+      <p>
         <span
           onClick={() => {
             setId(Date.now());
@@ -98,9 +99,9 @@ export const DirectTokenize = () => {
             deleteQueryParam("config");
           }}
         >
-          reset
+          [reset]
         </span>
-      </h3>
+      </p>
       <DirectTokenInner
         key={id}
         onConfigChanged={onConfigChanged}
