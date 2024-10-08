@@ -131,7 +131,7 @@ export class TokenizersHub {
   }
 
   tokenize(input: string, tokenizer: PreTrainedTokenizer): Token[] {
-    const ids = tokenizer.encode(input, undefined, {
+    const ids = tokenizer.encode(input, {
       add_special_tokens: false,
     });
     // const encoded = tokenizer._encode_text(input) || [];
@@ -159,10 +159,13 @@ export class TokenizersHub {
       // additional_special_tokens_num: tokenizer.additional_special_tokens.length,
       // special_tokens_num: tokenizer.special_tokens.length,
       chat_template: tokenizer.chat_template,
-      pad_token: tokenizer.getToken("pad_token") ?? tokenizer.pad_token,
+      pad_token:
+        (tokenizer as any).getToken("pad_token") ?? tokenizer.pad_token,
       // unk_token: tokenizer.getToken("unk_token") ?? tokenizer.pad_token,
-      bos_token: tokenizer.getToken("bos_token") ?? tokenizer.pad_token,
-      eos_token: tokenizer.getToken("eos_token") ?? tokenizer.pad_token,
+      bos_token:
+        (tokenizer as any).getToken("bos_token") ?? tokenizer.pad_token,
+      eos_token:
+        (tokenizer as any).getToken("eos_token") ?? tokenizer.pad_token,
       // mask_token: tokenizer.getToken("mask_token") ?? tokenizer.pad_token,
     };
   }
