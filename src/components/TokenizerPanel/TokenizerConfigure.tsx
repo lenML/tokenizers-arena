@@ -56,7 +56,7 @@ const TokenizerFromUrls = ({ onConfigChange }: Props) => {
             onChange={(e) => {
               setFormData((prev) => ({ ...prev, config_url: e.target.value }));
             }}
-            placeholder="https://huggingface.co/.../config.json"
+            placeholder="https://huggingface.co/.../tokenizer_config.json"
           />
         </label>
       </div>

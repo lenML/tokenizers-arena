@@ -4,6 +4,7 @@ import EventEmitter from "eventemitter3";
 
 type PreTrainedTokenizer = tokenizers.PreTrainedTokenizer;
 
+// NOTE: 这里的 package version 并不是 tokenizers 的 version，而是打包版本的 version，并不一定和 `tokenizers` 版本一致
 const package_version = "3.0.1";
 export const packages = [
   "llama3_1",

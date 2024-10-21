@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@lenml/tokenizers':
-    specifier: ^3.0.1
-    version: 3.0.1
+    specifier: ^3.0.3
+    version: 3.0.3
   '@quik-fe/stand':
     specifier: ^1.1.2
     version: 1.1.2
@@ -603,8 +603,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@lenml/tokenizers@3.0.1:
-    resolution: {integrity: sha512-rmj9gdhpVsZsWyKoO3q/uDWhzMjNOiIUEfH1bq8Ft0Y1kcmjE+hHtm8RcpanA5pPIJ5cz0+46K/s7Qh/J/b4IQ==}
+  /@lenml/tokenizers@3.0.3:
+    resolution: {integrity: sha512-gjIgkc/TEA+vDE4LwLD1u5OkArGxoFCqd3OB6dZbGVsXhv0FpElrNyrhHLaryLCXuY7SkjocI89fbc7ibcIjxA==}
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
