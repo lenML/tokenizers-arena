@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@lenml/tokenizers": "^3.0.3",
-    "@quik-fe/stand": "^1.1.2",
+    "@quik-fe/stand": "^1.1.10",
     "@types/draft-js": "^0.11.18",
     "@types/styled-components": "^5.1.34",
     "classnames": "^2.5.1",

@@ -77,6 +77,51 @@ const TokenizerFromUrls = ({ onConfigChange }: Props) => {
   );
 };
 
+const TokenizerFromHuggingfaceRepo = ({ onConfigChange }: Props) => {
+  const [formData, setFormData] = useState({
+    repo: "",
+  });
+  return (
+    <TokenizerFromUrlsBox>
+      <div>
+        <label>
+          Repo Name:
+          <input
+            type="text"
+            onChange={(e) => {
+              const repo = e.target.value ?? "";
+              setFormData((prev) => ({
+                ...prev,
+                repo,
+              }));
+            }}
+            placeholder="eg. meta-llama/Llama-3.2-1B"
+          />
+        </label>
+      </div>
+      <div>
+        <button
+          disabled={!formData.repo}
+          onClick={() => {
+            if (!formData.repo.match(/^[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/)) {
+              alert("Invalid repo name");
+              return;
+            }
+            const { repo } = formData;
+            onConfigChange({
+              type: "url",
+              json_url: `https://huggingface.co/${repo}/resolve/main/tokenizer.json?download=true`,
+              config_url: `https://huggingface.co/${repo}/resolve/main/tokenizer_config.json?download=true`,
+            });
+          }}
+        >
+          Load
+        </button>
+      </div>
+    </TokenizerFromUrlsBox>
+  );
+};
+
 const TokenizerFromPackagesBox = styled.div`
   display: flex;
 
@@ -89,7 +134,21 @@ const TokenizerFromPackagesBox = styled.div`
     button {
       padding: 4px;
       font-size: 16px;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      border-radius: 4px;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      &:active {
+        background-color: rgba(255, 255, 255, 0.4);
+      }
     }
+  }
+
+  p {
+    opacity: 0.75;
   }
 `;
 
@@ -140,8 +199,10 @@ const TokenizerConfigureBox = styled.div`
       border-bottom: 1px solid transparent;
 
       cursor: pointer;
+      opacity: 0.75;
 
       &.--selected {
+        opacity: 1;
         border-bottom-color: white;
         color: white;
       }
@@ -151,27 +212,36 @@ const TokenizerConfigureBox = styled.div`
 
 // 选择 tokenizer 配置
 export const TokenizerConfigure = ({ onConfigChange }: Props) => {
-  const [mode, setMode] = useState<"urls" | "packages">("packages");
+  const [mode, setMode] = useState<"urls" | "packages" | "repo">("packages");
 
   return (
     <TokenizerConfigureBox>
       <div className="configure-tabs">
         <button
+          className={classNames({ "--selected": mode === "repo" })}
+          onClick={() => setMode("repo")}
+        >
+          🤗 From Huggingface Repo
+        </button>
+        <button
           className={classNames({ "--selected": mode === "urls" })}
           onClick={() => setMode("urls")}
         >
-          From URLs
+          🌐 From URLs
         </button>
         <button
           className={classNames({ "--selected": mode === "packages" })}
           onClick={() => setMode("packages")}
         >
-          From Packages
+          📦 From Packages
         </button>
       </div>
       {mode === "urls" && <TokenizerFromUrls onConfigChange={onConfigChange} />}
       {mode === "packages" && (
         <TokenizerFromPackages onConfigChange={onConfigChange} />
+      )}
+      {mode === "repo" && (
+        <TokenizerFromHuggingfaceRepo onConfigChange={onConfigChange} />
       )}
     </TokenizerConfigureBox>
   );

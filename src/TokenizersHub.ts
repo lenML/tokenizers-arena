@@ -7,6 +7,12 @@ type PreTrainedTokenizer = tokenizers.PreTrainedTokenizer;
 // NOTE: 这里的 package version 并不是 tokenizers 的 version，而是打包版本的 version，并不一定和 `tokenizers` 版本一致
 const package_version = "3.0.1";
 export const packages = [
+  "gemma2",
+  "qwen2_5",
+  "aya_expanse",
+  "llama3_2",
+  "mistral_nemo",
+  "gemini",
   "llama3_1",
   "llama2",
   "llama3",
@@ -28,10 +34,12 @@ export const packages = [
   "text_davinci002",
   "text_davinci003",
   "text_embedding_ada002",
-].map((x) => ({
-  name: x,
-  url: `https://cdn.jsdelivr.net/npm/@lenml/tokenizer-${x}@${package_version}/+esm`,
-}));
+]
+  .sort()
+  .map((x) => ({
+    name: x,
+    url: `https://cdn.jsdelivr.net/npm/@lenml/tokenizer-${x}@${package_version}/+esm`,
+  }));
 
 // 从这里取得所有的 Tokenizers
 // 可以来自 package 或者 url
@@ -87,13 +95,32 @@ export class TokenizersHub {
     return this.pkg_registry[name];
   }
 
+  private async fetchJson(url: string) {
+    const content = await fetch(url);
+    if (content.status !== 200) {
+      throw new Error(
+        `fetch ${url} failed: ${content.status} ${
+          content.statusText
+        } \n${await content.text()}`.trim()
+      );
+    }
+    try {
+      return await content.json();
+    } catch (error) {
+      console.error(error);
+      throw new Error(
+        `parse data ${url} error: ${(error as any)?.message || error}`
+      );
+    }
+  }
+
   private async loadFromUrl(
     json_url: string,
     config_url: string
   ): Promise<PreTrainedTokenizer> {
-    const tokenizer = await TokenizerLoader.fromPreTrainedUrls({
-      tokenizerJSON: json_url,
-      tokenizerConfig: config_url,
+    const tokenizer = await TokenizerLoader.fromPreTrained({
+      tokenizerJSON: await this.fetchJson(json_url),
+      tokenizerConfig: await this.fetchJson(config_url),
     });
 
     return tokenizer;

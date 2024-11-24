@@ -206,18 +206,24 @@ const useSelectionTokenRange = ({
 
 const useTokenizer = (config: TokenizerDefine) => {
   const [tokenizer, setTokenizer] = useState<null | PreTrainedTokenizer>(null);
+  const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
     const loadTokenizer = async () => {
+      setError(null);
       const tokenizer = await TokenizersHub.instance.get(config);
       // NOTE: 因为 tokenizer is callable object
       setTokenizer(() => tokenizer);
     };
-    loadTokenizer();
+    loadTokenizer().catch((err) => {
+      console.error(err);
+      setError(err?.message || err);
+    });
   }, [config]);
 
   return {
     tokenizer,
+    error,
   };
 };
 
@@ -351,7 +357,7 @@ export function TokenizerPanel({
   inputValue?: string | null;
   getInitValue?: () => string | undefined | null;
 }) {
-  const { tokenizer } = useTokenizer(config);
+  const { tokenizer, error } = useTokenizer(config);
 
   const [value, setValue] = useState(
     () => getInitValue?.() ?? "Potato potato tomato potato."
@@ -390,6 +396,22 @@ export function TokenizerPanel({
     setValue(value);
     onChange?.(value);
   };
+
+  if (error) {
+    return (
+      <Body>
+        <pre
+          style={{
+            color: "red",
+            whiteSpace: "pre-wrap",
+            wordBreak: "break-all",
+          }}
+        >
+          {error}
+        </pre>
+      </Body>
+    );
+  }
 
   if (!tokenizer) {
     return (

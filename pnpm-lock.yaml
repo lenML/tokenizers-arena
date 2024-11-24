@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.0.3
     version: 3.0.3
   '@quik-fe/stand':
-    specifier: ^1.1.2
-    version: 1.1.2
+    specifier: ^1.1.10
+    version: 1.1.10
   '@types/draft-js':
     specifier: ^0.11.18
     version: 0.11.18
@@ -628,8 +628,8 @@ packages:
       fastq: 1.17.1
     dev: true
 
-  /@quik-fe/stand@1.1.2:
-    resolution: {integrity: sha512-kBqjXI4LkdpKqv/xXxa3wSE5IMa6xsw95vDpvQRrfVED//nLrIb00TepJ66TI50QkF6G3w+9YKyAD8ZHE8FdHg==}
+  /@quik-fe/stand@1.1.10:
+    resolution: {integrity: sha512-1vZNucOeu3p04e12TP7ny2W9CesNO4/IFGsFxQStF9yHijCzNFjPJclmGvYupYSBkDAW0RsIbLvnCxVPyWrpqQ==}
     dev: false
 
   /@remix-run/router@1.16.1:
@@ -1139,8 +1139,8 @@ packages:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
     dev: true
 
-  /core-js@3.38.1:
-    resolution: {integrity: sha512-OP35aUorbU3Zvlx7pjsFdu1rGNnD4pgw/CWoYzRY3t2EzoVT7shKHY1dlAy3f41cGIO7ZDPQimhGFTlEYkG/Hw==}
+  /core-js@3.39.0:
+    resolution: {integrity: sha512-raM0ew0/jJUqkJ0E6e8UDtl+y/7ktFivgWvqw8dNSQeNWoSDLvQ1H/RN3aPXB9tBd4/FhyR4RDPGhsNIMsAn7g==}
     requiresBuild: true
     dev: false
 
@@ -1422,7 +1422,7 @@ packages:
   /fbjs@2.0.0:
     resolution: {integrity: sha512-8XA8ny9ifxrAWlyhAbexXcs3rRMtxWcs3M0lctLfB49jRDHiaxj+Mo0XxbwE7nKZYzgCFoq64FS+WFd4IycPPQ==}
     dependencies:
-      core-js: 3.38.1
+      core-js: 3.39.0
       cross-fetch: 3.1.8
       fbjs-css-vars: 1.0.2
       loose-envify: 1.4.0
